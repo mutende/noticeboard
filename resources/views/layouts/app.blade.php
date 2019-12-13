@@ -23,7 +23,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css\animate.css') }}" rel="stylesheet">   
+    <link href="{{ asset('css\animate.css') }}" rel="stylesheet">
 </head>
 <body>
 
@@ -45,7 +45,7 @@
         <div class="mdl-layout-spacer"></div>
 
         <!-- <span class="mdl-layout-title mr-5 "><a class=" nav-link text-secondary" href="#">Reset Password</a></span> -->
-        
+
       <span class="mdl-layout-title change">
       <form id="logout-form" action="{{ route('logout') }}" method="POST" >
             @csrf
@@ -61,12 +61,12 @@
     </header>
 
     <nav class="demo-navigation mdl-navigation sidebar-nav-background">
-        <ul id="navmenu">        
+        <ul id="navmenu">
         <li><a href="{{ url('/')}}">View Notices</a></li>
         <li><a href="{{ route('notice.create') }}">Create Notices</a></li>
+        <li><a href="{{ route('add.users') }}">Add staff</a></li>
+        <li><a href="{{ route('roles') }}">Add roles</a></li>
         <li><a href="#">Profile</a></li>
-        <li><a href="#">Add staff</a></li>
-        <li><a href="">Add roles</a></li>
 
         </ul>
     </nav>
@@ -78,14 +78,14 @@
     <div class="mdl-grid demo-content">
         <div class="container-fluid">
             @yield('content')
-          
+
         </div>
 
 
     </div>
 
 </main>
-</div> 
+</div>
 @else
 <main class="py-4">
             <div class="container">
@@ -111,7 +111,7 @@
 
 <script>
 
- 
+
     $(function() {
     // Bootstrap DateTimePicker v4
     $('#dueDate').datetimepicker({

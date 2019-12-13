@@ -18,5 +18,8 @@ Route::resource('notice', 'NoticesController');
 // return redirect()->route('task.index');
 // });
 Route::get('/', 'HomeController@index');
+Route::get('users', 'AddUsersController@addusers')->name('add.users');
+Route::get('roles', 'RolesController@addroles')->name('roles');
+Route::post('roles/save','RolesController@store')->name('roles.store');
 
 Auth::routes();

@@ -7,12 +7,12 @@
 
 
 <div class="row mt-5">
-    <d class="col-md-4 ml-auto mr-auto">
+    <div class="col-md-4 ml-auto mr-auto">
       @if ($errors->any())
     <div class="text-danger">
         <ul>
             @foreach ($errors->all() as $error)
-           
+
                 <li> <small class="form-text text-muted text-danger"> {{ $error }} </small></li>
             @endforeach
         </ul>
@@ -27,7 +27,7 @@
             @error('title')
             <small id="passwordHelpBlock" class="form-text text-muted text-danger">{{ $message }}</small>
             @enderror
-          
+
             </div>
             <div class="form-group">
               <label for="inputDetails">Details</label><br>
@@ -35,7 +35,7 @@
             @error('details')
             <small id="inputDetails" class="form-text text-muted text-danger">{{ $message }}</small>
             @enderror
-                    
+
             </div>
             <div class="form-group">
               <label for="dueDate">Due Date</label><br>
@@ -44,7 +44,7 @@
             <small id="dueDate" class="form-text text-muted text-danger">{{ $message }}</small>
             @enderror
             </div>
-          
+
 
             <h5>Notice to: </h5>
             @foreach($roles as $role)
@@ -65,7 +65,7 @@
                   <label class="form-check-label" for="inlineRadio1">{{$role->role}}</label>
               </div>
             @endif
-             
+
           @endif
           @endforeach
           @error('role_id')
@@ -86,15 +86,15 @@
             <input class="form-check-input" type="radio" id="Webnotification" value="Web" checked name="platform">
             <label class="form-check-label" for="Webnotification">Web</label>
           </div>
-         
-         
+
+
 
 
           <div class="mt-3">
               <button type="submit" class="btn btn-primary">Send Notice</button>
           </div>
  </form>
- 
+
     </d>
 </div>
 
