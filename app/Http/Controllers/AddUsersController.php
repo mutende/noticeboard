@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Model\User;
 use App\Model\Role;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AddUsersController extends Controller
 {
@@ -15,6 +19,40 @@ class AddUsersController extends Controller
   public function addusers(){
 
      $roles = Role::all();
-    return view('users.add')->withRoles($roles);
+     $users = User::all();
+    return view('users.add', compact('roles','users'));
+  }
+
+  public function store(Request $request){
+
+    $this->validate($request,[
+        'name' => 'required|string|max:255|min:5',
+        'email' => 'required|string|max:255|min:10',
+        'role_id' => 'required',
+    ]);
+
+    $password = Hash::make('zalego123');
+
+    $user = new User();
+    $user->name = $request->name;
+    $user->email = $request->email;
+    $user->role_id = $request->role_id;
+    $user->password = $password;
+    $user->created_at = date('Y-m-d H:i:s');
+
+    if($user->save()){
+        return redirect()->route('add.users');
+    }else{
+      Session::flash('warning', 'Unable to create user');
+      return redirect()->route('add.users');
+    }
+  }
+
+  public function destroy($id){
+    $user = User::find($id);
+    if($user->delete($id)){
+      return redirect()->route('add.users');
+    }
+
   }
 }

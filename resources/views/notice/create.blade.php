@@ -49,10 +49,7 @@
             <h5>Notice to: </h5>
             @foreach($roles as $role)
             @if($role->id == 1)
-              <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="hidden" name="role_id" id="inlineRadio1" value="0" checked>
-                  <!-- <label class="form-check-label" for="inlineRadio1">All Staff</label> -->
-              </div>
+            <?php continue; ?>
             @else
             @if($role->id == 7)
             <div class="form-check form-check-inline">

@@ -18,8 +18,14 @@ Route::resource('notice', 'NoticesController');
 // return redirect()->route('task.index');
 // });
 Route::get('/', 'HomeController@index');
+
 Route::get('users', 'AddUsersController@addusers')->name('add.users');
+Route::post('users/save','AddUsersController@store')->name('users.store');
+Route::delete('user/{id}/delete','AddUsersController@destroy')->name('user.delete');
+
 Route::get('roles', 'RolesController@addroles')->name('roles');
 Route::post('roles/save','RolesController@store')->name('roles.store');
+Route::delete('role/{id}/delete','RolesController@destroy')->name('role.delete');
+Route::put('role/{id}/update','RolesController@update')->name('role.update');
 
 Auth::routes();

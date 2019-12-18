@@ -5,7 +5,7 @@
 <div class="row mt-5">
 
   <div class="col-md-4 mr-4">
-    <form method= "POST" action="#">
+    <form method= "POST" action="{{ route('users.store') }}">
       {{ csrf_field() }}
       <div class="form-group">
         <label for="inputName">Full Name</label>
@@ -33,10 +33,7 @@
         </div>
       @else
       @if($role->id == 7)
-      <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="role_id" id="inlineRadio1" value="{{$role->id}}" checked>
-            <label class="form-check-label" for="inlineRadio1">{{$role->role}}</label>
-        </div>
+      <?php continue; ?>
         @else
         <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="role_id" id="inlineRadio1" value="{{$role->id}}">
@@ -59,7 +56,54 @@
     </form>
   </div>
   <div class="col-md-7">
-    table
+
+    @if($users->count() < 2)
+    <div class="mt-5 text-center">
+    <h5>No staff added</h5>
+
+    </div>
+    @else
+
+    <table class="table table-sm table-hover">
+      <tr>
+        <thead class="thead-dark">
+          <th>#</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role Group</th>
+          <th>Action</th>
+        </thead>
+      </tr>
+      <tbody>
+        <?php $count = 1; ?>
+        @foreach($users as $user)
+        @if($user->role_id == 1)
+        <?php continue; ?>
+        @endif
+        <tr>
+          <td><?php echo $count; ?></td>
+          <td>{{$user->name}}</td>
+          <td>{{$user->email}}</td>
+          <td>{{$user->role->role}}</td>
+
+          <td>
+            <form  action="{{ route('user.delete', $user->id )}}" method="POST">
+              {{ csrf_field() }}
+              {{ method_field('DELETE') }}
+            <a onclick="document.getElementById('role{{$user->id}}').style.display='block'" style="color:white;" class="btn btn-primary btn-sm">
+                  Update
+            </a>
+
+              <button class="btn btn-group-sm btn-sm btn-danger" type="submit">Delete</button>
+            </form>
+          </td>
+        </tr>
+        <?php $count++; ?>
+        @endforeach
+      </tbody>
+
+    </table>
+      @endif
   </div>
 
 </div>

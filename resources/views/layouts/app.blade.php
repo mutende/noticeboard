@@ -14,6 +14,7 @@
       <!-- Include css files to support mdl -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="{{ URL::asset('bootstrap\css\material.light_blue-blue.min.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('bootstrap\css\bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('bootstrap\css\font-awesome.min.css') }}">
@@ -23,7 +24,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css\animate.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/animate.css') }}" rel="stylesheet">
 </head>
 <body>
 
@@ -42,11 +43,13 @@
 <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
     <div class="mdl-layout__header-row">
         <span class="mdl-layout-title">Welcome {{ Auth::user()->name }}</span>
+
         <div class="mdl-layout-spacer"></div>
 
         <!-- <span class="mdl-layout-title mr-5 "><a class=" nav-link text-secondary" href="#">Reset Password</a></span> -->
-
+  <span class="mdl-layout-title mr-2">Role Group {{ Auth::user()->role->role }}</span>
       <span class="mdl-layout-title change">
+
       <form id="logout-form" action="{{ route('logout') }}" method="POST" >
             @csrf
             <button class="btn btn-group-sm btn-outline-danger ml-3" type="submit">Logout</button>
@@ -64,8 +67,8 @@
         <ul id="navmenu">
         <li><a href="{{ url('/')}}">View Notices</a></li>
         <li><a href="{{ route('notice.create') }}">Create Notices</a></li>
-        <li><a href="{{ route('add.users') }}">Add staff</a></li>
-        <li><a href="{{ route('roles') }}">Add roles</a></li>
+        <li><a href="{{ route('add.users') }}">Staff</a></li>
+        <li><a href="{{ route('roles') }}">Roles</a></li>
         <li><a href="#">Profile</a></li>
 
         </ul>
@@ -78,6 +81,8 @@
     <div class="mdl-grid demo-content">
         <div class="container-fluid">
             @yield('content')
+
+
 
         </div>
 
@@ -99,8 +104,8 @@
      {{-- Bootstrap js --}}
 <script type="text/javascript" src="{{ URL::asset('bootstrap\js\material.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('bootstrap\js\main.js') }}"></script>
-<!-- <script type="text/javascript" src="{{ URL::asset('bootstrap\js\jquery-3.3.1.slim.min.js') }}"> jquery-3.3.1.min.js</script> -->
-<script type="text/javascript" src="{{ URL::asset('bootstrap\js\jquery-3.3.1.min.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('bootstrap\js\jquery-3.3.1.slim.min.js') }}"> jquery-3.3.1.min.js</script>
+<!-- <script type="text/javascript" src="{{ URL::asset('bootstrap\js\jquery-3.3.1.min.js') }}"></script> -->
 
 
 <script type="text/javascript" src="{{ URL::asset('bootstrap\js\popper.min.js') }}"></script>
@@ -108,6 +113,19 @@
 <script type="text/javascript" src="{{ URL::asset('bootstrap\datetimepicker\build\jquery.datetimepicker.full.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('datatables\datatables.min.js') }}"></script>
 
+
+
+<script>
+
+// $(document).ready(function() {
+//     $('#table22').DataTable();
+// } );
+
+$(document).ready(function() {
+    $('#alltables').DataTable();
+
+} );
+</script>
 
 <script>
 
@@ -123,12 +141,6 @@
 
 </script>
 
-<script>
 
-
-$(document).ready(function() {
-    $('#table').DataTable();
-} );
-</script>
 </body>
 </html>

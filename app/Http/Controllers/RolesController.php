@@ -40,4 +40,31 @@ class RolesController extends Controller
       }
 
   }
+
+  public function destroy($id){
+    $role = Role::find($id);
+    if($role->delete($id)){
+      return redirect()->route('roles');
+    }
+
+  }
+
+  public function update($id, Request $r){
+    $role = Role::findOrFail($id);
+
+    $this->validate($r, [
+        'role' => 'required|string',
+    ]);
+
+    $role->role = $r->role;
+    if($role->save()){
+        return redirect()->route('roles');
+    }else{
+
+    Session::flash('warning', 'Update failed, try again later');
+    return redirect()->route('roles');
+
+    }
+
+  }
 }

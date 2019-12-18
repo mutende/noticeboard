@@ -52,7 +52,7 @@ class NoticesController extends Controller
             'platform' => 'required',
         ]);
 
-      
+
             // create a notice object
         $notice = new Notice();
         $notice->title = $request->title;
@@ -83,15 +83,17 @@ class NoticesController extends Controller
 
     public function show($id)
     {
-        //
+
+        $notice = Notice::findorFail($id);
+        return view('notice.notice')->withNotice($notice);
     }
 
 
     public function edit($id)
     {
-
-            $task = Notice::find($id);
-            return view('notice.update')->withTask($task);
+            $roles = Role::all();
+            $notice = Notice::findorFail($id);
+            return view('notice.update', compact('roles','notice'));
 
 
     }
@@ -102,26 +104,41 @@ class NoticesController extends Controller
 
 
 
-
-        $this->validate($request,[
-            'name' => 'required|string|max:100|min:5',
-            'description' => 'required|string|max:1000|min:10',
-            'due_date' => 'required|date',
-        ]);
-
-
-        $task = Notice::find($id);
-        $task->name = $request->name;
-        $task->description = $request->description;
-        $task->due_date = $request->due_date;
-
-        $task->save();
+      $this->validate($request,[
+          'title' => 'required|string|max:100|min:5',
+          'details' => 'required|string|max:1000|min:10',
+          'due_date' => 'required',
+          'role_id' => 'required',
+          'platform' => 'required',
+      ]);
 
 
-        Session::flash('success', 'Notice updated successfully');
+        $notice= Notice::findorFail($id);
+        $notice->title = $request->title;
+        $notice->details = $request->details;
+        $notice->due_date = $request->due_date;
+        $notice->role_id = $request->role_id;
+        $notice->platform = $request->platform;
+        $notice->user_id = Auth::user()->id;
+
+        $notice->save();
+
+
+
 
 
         return redirect()->route('notice.index');
+        // save notice
+        if($notice->save()){
+        return redirect()->route('notice.index');
+        }else{
+
+
+        Session::flash('warning', 'Update Faile');
+        return redirect()->route('notice.edit',$id);
+
+        }
+
 
 
 
@@ -131,7 +148,7 @@ class NoticesController extends Controller
     public function destroy($id)
     {
 
-        $n= Notice::find($id);
+        $n= Notice::findorFail($id);
         $n->delete();
 
          Session::flash('success', 'Notice was deleted');
