@@ -14,7 +14,8 @@
       <!-- Include css files to support mdl -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <link rel="stylesheet" href="{{  URL::asset('css/w3.css')  }}">
     <link rel="stylesheet" href="{{ URL::asset('bootstrap\css\material.light_blue-blue.min.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('bootstrap\css\bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('bootstrap\css\font-awesome.min.css') }}">
