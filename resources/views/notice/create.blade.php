@@ -23,7 +23,7 @@
             {{ csrf_field() }}
             <div class="form-group">
             <label for="inputTitle">Title</label>
-            <input type="text" class="form-control" name ="title" id="inputTitle" aria-describedby="titleHelp" required>
+            <input type="text" class="form-control" name ="title" value="{{ old('title') }}" id="inputTitle" aria-describedby="titleHelp" required>
             @error('title')
             <small id="passwordHelpBlock" class="form-text text-muted text-danger">{{ $message }}</small>
             @enderror
@@ -31,7 +31,7 @@
             </div>
             <div class="form-group">
               <label for="inputDetails">Details</label><br>
-            <textarea name="details" class="form-control" id="inputDetails" cols="43" rows="5" required></textarea>
+            <textarea name="details" class="form-control" id="inputDetails"  cols="43" rows="5" required>{{ old('details') }}</textarea>
             @error('details')
             <small id="inputDetails" class="form-text text-muted text-danger">{{ $message }}</small>
             @enderror
@@ -39,7 +39,7 @@
             </div>
             <div class="form-group">
               <label for="dueDate">Due Date</label><br>
-            <input type="text" id ="dueDate" class="form-control datepicker" name="due_date" required readonly></input>
+            <input type="text" id ="dueDate" class="form-control datepicker" name="due_date" value="{{ old('due_date') }}" required readonly></input>
             @error('due_date')
             <small id="dueDate" class="form-text text-muted text-danger">{{ $message }}</small>
             @enderror
@@ -80,10 +80,12 @@
             <label class="form-check-label" for="SMSnotification">SMS</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id="Webnotification" value="Web" checked name="platform">
+            <input class="form-check-input" type="radio" id="Webnotification" value="Web"  name="platform">
             <label class="form-check-label" for="Webnotification">Web</label>
           </div>
-
+          @error('platform')
+          <small id="passwordHelpBlock" class="form-text text-muted text-danger">{{ $message }}</small>
+            @enderror
 
 
 

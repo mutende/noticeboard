@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\User;
 use App\Model\Notice;
 use App\Model\Role;
+use App\Mail\NoticeEMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+
 
 
 class NoticesController extends Controller
@@ -39,11 +43,7 @@ class NoticesController extends Controller
 
 
     public function store(Request $request)
-    {
-
-
-
-           //validate data
+    {           //validate data
         $this->validate($request,[
             'title' => 'required|string|max:100|min:5',
             'details' => 'required|string|max:1000|min:10',
@@ -51,9 +51,44 @@ class NoticesController extends Controller
             'role_id' => 'required',
             'platform' => 'required',
         ]);
+        $data = array($request->title,$request->details,$request->due_date);
+
+        if($request->role_id == 7){
+            $userdata = $users = User::all();
+        }else{
+
+              $userdata = $users = User::where('role_id', $request->role_id)->get();
+        }
 
 
-            // create a notice object
+
+        if($request->platform == "Email"){
+
+          foreach ($userdata as $user) {
+            //inactive users and removing super user
+            if(!$user['status'] || $user['role_id'] == 1){
+              echo 'Inactive user<br>';
+              continue;
+            }else{
+              //relevant group of users or all users
+              if($user['role_id'] == $request->role_id || $request->role_id == 7){
+
+                $recipient =  $user['email'];
+                $name = $user['name'];
+                Mail::to($recipient)->send(new NoticeEMail($data,$name));
+                sleep(2);
+              }else{
+                continue;
+              }
+
+            }
+
+          }
+        }
+
+  //echo 'outside if '.$request->platform;
+
+        // create a notice object
         $notice = new Notice();
         $notice->title = $request->title;
         $notice->details = $request->details;
