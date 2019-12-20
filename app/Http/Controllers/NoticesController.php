@@ -21,7 +21,7 @@ class NoticesController extends Controller
     public function index()
     {
         //get all noices
-        $notices = Notice::where('user_id', Auth::user()->id)->orderBy('due_date', 'asc')->paginate(20);
+        $notices = Notice::orderBy('created_at', 'desc')->get();
 
         return view('notice.index')->withNotices($notices);
 
@@ -121,20 +121,20 @@ class NoticesController extends Controller
         $notice->platform = $request->platform;
         $notice->user_id = Auth::user()->id;
 
-        $notice->save();
-
-
-
-
-
-        return redirect()->route('notice.index');
+        // $notice->save();
+        //
+        //
+        //
+        //
+        //
+        // return redirect()->route('notice.index');
         // save notice
         if($notice->save()){
         return redirect()->route('notice.index');
         }else{
 
 
-        Session::flash('warning', 'Update Faile');
+        Session::flash('warning', 'Update Failed');
         return redirect()->route('notice.edit',$id);
 
         }
@@ -157,5 +157,19 @@ class NoticesController extends Controller
 
 
 
+    }
+
+
+    public function suspend($id)
+    {
+      $notice= Notice::findorFail($id);
+      $notice->status=false;
+      if($notice->save()){
+      return redirect()->route('notice.index');
+      }else{
+      Session::flash('warning', 'Update Failed');
+      return redirect()->route('notice.index');
+
+      }
     }
 }

@@ -49,10 +49,39 @@ class AddUsersController extends Controller
   }
 
   public function destroy($id){
-    $user = User::find($id);
+    $user = User::findorFail($id);
     if($user->delete($id)){
       return redirect()->route('add.users');
     }
 
+  }
+
+
+  public function suspend($id)
+  {
+    $user = User::findorFail($id);
+    $user->status=false;
+    if($user->save()){
+        return redirect()->route('add.users');
+    }else{
+      Session::flash('warning', 'Update Failed');
+      return redirect()->route('add.users');
+    }
+  }
+
+  public function update(Request $request, $id ){
+    $user = User::findorFail($id);
+    $user->role_id = $request->role_id;
+    if($request->status == 0){
+      $user->status = false;
+    }else{
+      $user->status =true;
+    }
+    if($user->save()){
+        return redirect()->route('add.users');
+    }else{
+      Session::flash('warning', 'Update Failed');
+      return redirect()->route('add.users');
+    }
   }
 }

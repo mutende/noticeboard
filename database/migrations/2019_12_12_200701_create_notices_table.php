@@ -22,6 +22,7 @@ class CreateNoticesTable extends Migration
             $table->text('platform')->default('Web');
             $table->date('due_date');
             $table->unsignedInteger('user_id');
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

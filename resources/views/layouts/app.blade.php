@@ -66,11 +66,15 @@
 
     <nav class="demo-navigation mdl-navigation sidebar-nav-background">
         <ul id="navmenu">
+          @if(Auth::user()->role_id == 1)
         <li><a href="{{ url('/')}}">View Notices</a></li>
         <li><a href="{{ route('notice.create') }}">Create Notices</a></li>
         <li><a href="{{ route('add.users') }}">Staff</a></li>
         <li><a href="{{ route('roles') }}">Roles</a></li>
-        <li><a href="#">Profile</a></li>
+        <!-- <li><a href="#">Profile</a></li> -->
+        @else
+          <li><a href="{{ url('/')}}">View Notices</a></li>
+        @endif
 
         </ul>
     </nav>

@@ -22,9 +22,16 @@
 
         <div class="row">
           <div class="col-md-6">
-            <form class="" action="" method="post">
+            <form class="" action="{{ route('notice.suspend', $notice->id )}}" method="post">
+              {{csrf_field()}}
+              {{method_field ('PUT')}}
+              @if(Auth::user()->role_id == 1)
+                @if($notice->status)
                <a href="{{ route('notice.edit', $notice->id) }}" class="btn btn-group btn-sm btn-primary">Update</a>
-                  <button type="submit" class="btn btn-sm btn-info text-white ml-3" name="button">Suspend</button>
+                  <button type="submit" class="btn btn-sm btn-warning ml-3 mr-3" name="button">Suspend</button>
+                @endif
+                @endif
+                 <a href="{{ url('/') }}" class="btn btn-group btn-sm btn-info">Go back</a>
             </form>
 
 

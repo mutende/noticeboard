@@ -13,6 +13,7 @@
 
 
 Route::resource('notice', 'NoticesController');
+Route::put('notice/{id}/suspend', 'NoticesController@suspend')->name('notice.suspend');
 
 // Route::get('/', function(){
 // return redirect()->route('task.index');
@@ -22,6 +23,8 @@ Route::get('/', 'HomeController@index');
 Route::get('users', 'AddUsersController@addusers')->name('add.users');
 Route::post('users/save','AddUsersController@store')->name('users.store');
 Route::delete('user/{id}/delete','AddUsersController@destroy')->name('user.delete');
+Route::get('user/{id}/suspend', 'AddUsersController@suspend')->name('user.suspend');
+Route::put('user/{id}/update','AddUsersController@update')->name('user.update');
 
 Route::get('roles', 'RolesController@addroles')->name('roles');
 Route::post('roles/save','RolesController@store')->name('roles.store');
