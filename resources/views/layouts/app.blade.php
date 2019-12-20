@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <link rel="icon" href="{{ asset('img/logo.png') }}" type="image/gif" sizes="16x16">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -37,9 +38,26 @@
 
 
 <!-- my template -->
-@if (Auth::check())
+@if(Auth::check())
+
+
 
 <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+  @if(!Auth::user()->status)
+  <div class="container mt-5">
+
+
+
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" >
+      <h3>
+        Your Account has been suspended, Kindly contact the admin
+      </h3>
+          @csrf
+          <button class="btn btn-group-sm btn-outline-danger ml-3" type="submit">Logout</button>
+      </form>
+      </div>
+
+  @else
 
 <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
     <div class="mdl-layout__header-row">
@@ -95,7 +113,9 @@
     </div>
 
 </main>
+@endif
 </div>
+
 @else
 <main class="py-4">
             <div class="container">
