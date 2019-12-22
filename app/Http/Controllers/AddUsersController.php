@@ -29,23 +29,37 @@ class AddUsersController extends Controller
         'name' => 'required|string|max:255|min:5',
         'email' => 'required|string|max:255|min:10',
         'role_id' => 'required',
+        'phonenumber'=>'required|string|min:13|max:13',
     ]);
 
     $password = Hash::make('zalego123');
 
-    $user = new User();
-    $user->name = $request->name;
-    $user->email = $request->email;
-    $user->role_id = $request->role_id;
-    $user->password = $password;
-    $user->created_at = date('Y-m-d H:i:s');
+    //get duplicate Users
+     $duplicateuserscount = User::where('email',$request->email)->count();
 
-    if($user->save()){
-        return redirect()->route('add.users');
-    }else{
-      Session::flash('warning', 'Unable to create user');
-      return redirect()->route('add.users');
-    }
+     if($duplicateuserscount > 0 ){
+       Session::flash('warning', 'The email already exists, kindly use another email');
+       return redirect()->route('add.users');
+     }else{
+
+       $user = new User();
+       $user->name = $request->name;
+       $user->email = $request->email;
+       $user->phonenumber = $request->phonenumber;
+       $user->role_id = $request->role_id;
+       $user->password = $password;
+       $user->created_at = date('Y-m-d H:i:s');
+
+       if($user->save()){
+           return redirect()->route('add.users');
+       }else{
+         Session::flash('warning', 'Unable to create user');
+         return redirect()->route('add.users');
+       }
+
+     }
+
+
   }
 
   public function destroy($id){
@@ -83,5 +97,46 @@ class AddUsersController extends Controller
       Session::flash('warning', 'Update Failed');
       return redirect()->route('add.users');
     }
+  }
+
+  public function editprofile($id){
+      $user = User::findorFail($id);
+      return view('users.profile')->withUser($user);
+
+  }
+
+  public function updateprofile(Request $request, $id){
+
+    $this->validate($request,[
+        'name' => 'required|string|max:255|min:5',
+        'email' => 'required|string|max:255|min:10',
+        'phonenumber'=>'required|string|min:13|max:13',
+    ]);
+
+
+     $duplicateuserscount = User::where('email',$request->email)->count();
+
+     if($duplicateuserscount > 1 ){
+       Session::flash('warning', 'The new email you have set belongs to another account');
+       return redirect()->route('user.edit.profile', $id);
+     }else{
+
+         $user = User::findorFail($id);
+         $user->name = $request->name;
+         $user->email = $request->email;
+         $user->phonenumber = $request->phonenumber;
+         $user->updated_at = date('Y-m-d H:i:s');
+
+         if($user->save()){
+           Session::flash('success', 'You have updated your profile');
+           return redirect()->route('user.edit.profile', $id);
+         }else{
+           Session::flash('warning', 'Update Failed');
+           return redirect()->route('user.edit.profile', $id);
+         }
+
+     }
+
+
   }
 }

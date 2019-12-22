@@ -2,13 +2,13 @@
 @section('title', 'Add Users')
 @section('content')
 
-<div class="row mt-5">
-  <div class="col-md-3 mr-4">
+<div class="row mt-5" style="width:120% !important;">
+  <div class="col-md-3 mr-2">
     <form method= "POST" action="{{ route('users.store') }}">
       {{ csrf_field() }}
       <div class="form-group">
         <label for="inputName">Full Name</label>
-        <input type="text" class="form-control" name ="name" id="inputName" aria-describedby="nameHelp" required>
+        <input type="text" class="form-control" name ="name" id="inputName" aria-describedby="nameHelp" value="{{ old('name') }}" required>
         @error('name')
         <small id="nameHelp" class="form-text text-muted text-danger">{{ $message }}</small>
         @enderror
@@ -16,9 +16,18 @@
 
       <div class="form-group">
         <label for="inputEmail">Email Address</label>
-        <input type="text" class="form-control" name ="email" id="inputEmail" aria-describedby="emailHelp" required>
+        <input type="text" class="form-control" name ="email" value="{{ old('email') }}" id="inputEmail" aria-describedby="emailHelp" required>
         @error('email')
         <small id="emailHelp" class="form-text text-muted text-danger">{{ $message }}</small>
+        @enderror
+      </div>
+
+
+      <div class="form-group">
+        <label for="inputPhone">Phonenumber</label>
+        <input type="text" class="form-control" name ="phonenumber" value="{{ old('phonenumber') }}" id="inputPhone" aria-describedby="phoneHelp" required>
+        @error('phonenumber')
+        <small id="phoneHelp" class="form-text text-muted text-danger">{{ $message }}</small>
         @enderror
       </div>
 
@@ -60,13 +69,14 @@
     </div>
     @else
 
-    <table class="table table-sm table-hover" id="alltables">
+    <table class="table table-sm table-hover table-responsive" id="alltables">
 
         <thead class="thead-dark">
           <tr>
             <th>#</th>
             <th>Name</th>
             <th>Email</th>
+            <th>Phone</th>
             <th>Role Group</th>
             <th>Status</th>
             <th>Action</th>
@@ -83,6 +93,7 @@
           <td><?php echo $count; ?></td>
           <td>{{$user->name}}</td>
           <td>{{$user->email}}</td>
+            <td>{{$user->phonenumber}}</td>
           <td>{{$user->role->role}}</td>
           <td>
             @if($user->status)

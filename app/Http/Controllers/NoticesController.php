@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Pnlinh\InfobipSms\Facades\InfobipSms;
 
 
 
@@ -67,7 +68,6 @@ class NoticesController extends Controller
           foreach ($userdata as $user) {
             //inactive users and removing super user
             if(!$user['status'] || $user['role_id'] == 1){
-              echo 'Inactive user<br>';
               continue;
             }else{
               //relevant group of users or all users
@@ -84,6 +84,41 @@ class NoticesController extends Controller
             }
 
           }
+        }else
+        if($request->platform == "SMS"){
+          echo 'Sending SMS<br>';
+            $recipients = array();
+          foreach($userdata as $user){
+
+            if(!$user['status'] || $user['role_id'] == 1){
+              continue;
+            }else{
+
+              if($user['role_id'] == $request->role_id || $request->role_id == 7){
+
+                $recipients[] +=  substr($user['phonenumber'], -12);
+
+              }else{
+                continue;
+              }
+
+            }
+
+          }
+
+          echo '<prev>';
+              print_r($recipients);
+          echo '</prev>';
+
+          echo'<br>';
+          $response = InfobipSms::send($recipients, $request->details);
+
+          echo '<prev>';
+            print_r($response);
+          echo '</prev>';
+
+
+          exit();
         }
 
   //echo 'outside if '.$request->platform;

@@ -14,26 +14,34 @@ class RolesTableSeeder extends Seeder
     {
         DB::table('roles')->insert([
             'role'=> 'Superuser',
+            'created_at'=> date('Y-m-d H:i:s'),
         ]);
         DB::table('roles')->insert([
             'role'=> 'Operations',
+            'created_at'=> date('Y-m-d H:i:s'),
         ]);
-        DB::table('roles')->insert([           
+        DB::table('roles')->insert([
             'role' => 'Administration',
+            'created_at'=> date('Y-m-d H:i:s'),
         ]);
-        DB::table('roles')->insert([            
-            'role' => 'Finance',    
+        DB::table('roles')->insert([
+            'role' => 'Finance',
+            'created_at'=> date('Y-m-d H:i:s'),
         ]);
-        DB::table('roles')->insert([    
-            'role' => 'Human Resource',           
+        DB::table('roles')->insert([
+            'role' => 'HR',
+            'created_at'=> date('Y-m-d H:i:s'),
         ]);
-        DB::table('roles')->insert([           
-            'role'=> 'Instructors',    
+        DB::table('roles')->insert([
+            'role'=> 'Instructors',
+            'created_at'=> date('Y-m-d H:i:s'),
         ]);
 
         DB::table('roles')->insert([
-            'id'=>0,
+
             'role'=> 'All Staff',
+            'created_at'=> date('Y-m-d H:i:s'),
+
         ]);
     }
 }

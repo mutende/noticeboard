@@ -66,7 +66,7 @@
         <div class="mdl-layout-spacer"></div>
 
         <!-- <span class="mdl-layout-title mr-5 "><a class=" nav-link text-secondary" href="#">Reset Password</a></span> -->
-  <span class="mdl-layout-title mr-2">Role Group {{ Auth::user()->role->role }}</span>
+  <span class="mdl-layout-title mr-3">Role Group:<span class="text-success"> {{ Auth::user()->role->role }}</span></span>
       <span class="mdl-layout-title change">
 
       <form id="logout-form" action="{{ route('logout') }}" method="POST" >
@@ -89,10 +89,11 @@
         <li><a href="{{ route('notice.create') }}">Create Notices</a></li>
         <li><a href="{{ route('add.users') }}">Staff</a></li>
         <li><a href="{{ route('roles') }}">Roles</a></li>
-        <!-- <li><a href="#">Profile</a></li> -->
+
         @else
           <li><a href="{{ url('/')}}">View Notices</a></li>
         @endif
+          <li><a href="{{ route('user.edit.profile', Auth::user()->id )}}">Profile</a></li>
 
         </ul>
     </nav>
@@ -103,6 +104,7 @@
 <main class="mdl-layout__content mdl-color--grey-100">
     <div class="mdl-grid demo-content">
         <div class="container-fluid">
+          @include('alerts.message_alerts')
             @yield('content')
 
 

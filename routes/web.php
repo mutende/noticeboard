@@ -25,6 +25,8 @@ Route::post('users/save','AddUsersController@store')->name('users.store');
 Route::delete('user/{id}/delete','AddUsersController@destroy')->name('user.delete');
 Route::get('user/{id}/suspend', 'AddUsersController@suspend')->name('user.suspend');
 Route::put('user/{id}/update','AddUsersController@update')->name('user.update');
+Route::get('user/{id}/profile','AddUsersController@editprofile')->name('user.edit.profile');
+Route::put('user/{id}/profile','AddUsersController@updateprofile')->name('user.update.profile');
 
 Route::get('roles', 'RolesController@addroles')->name('roles');
 Route::post('roles/save','RolesController@store')->name('roles.store');

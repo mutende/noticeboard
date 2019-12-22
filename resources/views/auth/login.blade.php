@@ -15,7 +15,7 @@
 					@csrf
 						<div class="input-group mb-3">
 							<div class="input-group-append">
-								<span class="input-group-text"><i class="fas fa-user"></i></span>
+								<span class="input-group-text"><i class=""></i>@</span>
 							</div>
 							<input id="email" type="email" name="email" class="form-control input_user @error('email') is-invalid @enderror" value="{{ old('email') }}" placeholder="Email">
 							@error('email')
@@ -30,30 +30,39 @@
 							</div>
 							<input id="password" type="password" name="password" class="form-control input_pass @error('password') is-invalid @enderror" value="" placeholder="password">
 							@error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                  <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                  </span>
                                 @enderror
 						</div>
-						<div class="form-group">
+						<!-- <div class="form-group">
 							<div class="custom-control custom-checkbox">
 								<input type="checkbox" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }} class="custom-control-input" id="customControlInline">
 								<label class="custom-control-label" for="customControlInline">Remember me</label>
 							</div>
-						</div>
+						</div> -->
+
+<!--
+        <div class="form-group">
+						<div class="custom-control custom-checkbox">
+
+            <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }} id="customControlInline"> Remember Me
+
+					</div>
+
+        </div> -->
 							<div class="d-flex justify-content-center mt-3 login_container">
 				 	<button type="submit"  class="btn login_btn"> Login</button>
 				   </div>
 					</form>
 				</div>
-		
 				<div class="mt-4">
 					<!-- <div class="d-flex justify-content-center links">
 						Don't have an account? <a href="#" class="ml-2">Sign Up</a>
 					</div> -->
-					<div class="d-flex justify-content-center links">
+					<!-- <div class="d-flex justify-content-center links">
 						<a href="#">Forgot your password?</a>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>
