@@ -76,7 +76,7 @@ class NoticesController extends Controller
                 $recipient =  $user['email'];
                 $name = $user['name'];
                 Mail::to($recipient)->send(new NoticeEMail($data,$name));
-                sleep(2);
+
               }else{
                 continue;
               }
@@ -106,22 +106,21 @@ class NoticesController extends Controller
 
           }
 
-          echo '<prev>';
-              print_r($recipients);
-          echo '</prev>';
-
-          echo'<br>';
           $response = InfobipSms::send($recipients, $request->details);
 
-          echo '<prev>';
-            print_r($response);
-          echo '</prev>';
+          $responseCode = $response[0];
+
+          if($responseCode == 200){
+            Session::flash('success', 'SMS notice has been sent successfully');
 
 
-          exit();
+          }else{
+            Session::flash('warning', 'Technical error occurred, SMS was not send');
+              return redirect()->route('notice.create');
+
+          }
         }
 
-  //echo 'outside if '.$request->platform;
 
         // create a notice object
         $notice = new Notice();
@@ -135,13 +134,9 @@ class NoticesController extends Controller
 
         // save notice
         if($notice->save()){
-        //alert user and redirect
-        Session::flash('success', 'Notice created');
         return redirect()->route('notice.index');
         }else{
-
-
-        Session::flash('warning', 'Notice not created');
+        Session::flash('warning', 'Technical Error Occurred, Notice not created');
         return redirect()->route('notice.create');
 
         }
@@ -191,14 +186,7 @@ class NoticesController extends Controller
         $notice->platform = $request->platform;
         $notice->user_id = Auth::user()->id;
 
-        // $notice->save();
-        //
-        //
-        //
-        //
-        //
-        // return redirect()->route('notice.index');
-        // save notice
+
         if($notice->save()){
         return redirect()->route('notice.index');
         }else{
