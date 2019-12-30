@@ -19,6 +19,7 @@ Route::put('notice/{id}/suspend', 'NoticesController@suspend')->name('notice.sus
 // return redirect()->route('task.index');
 // });
 Route::get('/', 'HomeController@index');
+Route::get('/home', 'HomeController@index');
 
 Route::get('users', 'AddUsersController@addusers')->name('add.users');
 Route::post('users/save','AddUsersController@store')->name('users.store');

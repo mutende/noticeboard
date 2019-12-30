@@ -35,35 +35,18 @@
                   </span>
                                 @enderror
 						</div>
-						<!-- <div class="form-group">
-							<div class="custom-control custom-checkbox">
-								<input type="checkbox" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }} class="custom-control-input" id="customControlInline">
-								<label class="custom-control-label" for="customControlInline">Remember me</label>
-							</div>
-						</div> -->
 
-<!--
-        <div class="form-group">
-						<div class="custom-control custom-checkbox">
 
-            <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }} id="customControlInline"> Remember Me
-
-					</div>
-
-        </div> -->
-							<div class="d-flex justify-content-center mt-3 login_container">
+							<div class="d-flex flex-column justify-content-center mt-3 login_container">
 				 	<button type="submit"  class="btn login_btn"> Login</button>
+					<a class="btn btn-link" href="{{ route('password.request')}}">
+						 Forgot Your Password?
+				 </a>
 				   </div>
+
 					</form>
 				</div>
-				<div class="mt-4">
-					<!-- <div class="d-flex justify-content-center links">
-						Don't have an account? <a href="#" class="ml-2">Sign Up</a>
-					</div> -->
-					<!-- <div class="d-flex justify-content-center links">
-						<a href="#">Forgot your password?</a>
-					</div> -->
-				</div>
+			
 			</div>
 		</div>
 	</div>

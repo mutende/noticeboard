@@ -25,7 +25,7 @@
 
       <div class="form-group">
         <label for="inputPhone">Phonenumber</label>
-        <input type="text" class="form-control" name ="phonenumber" value="{{ old('phonenumber') }}" id="inputPhone" aria-describedby="phoneHelp" required>
+        <input type="text" class="form-control" name ="phonenumber" value="{{ old('phonenumber') }}" id="inputPhone" aria-describedby="phoneHelp" placeholder="+2547..." required>
         @error('phonenumber')
         <small id="phoneHelp" class="form-text text-muted text-danger">{{ $message }}</small>
         @enderror

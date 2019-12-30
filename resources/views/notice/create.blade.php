@@ -48,20 +48,14 @@
 
             <h5>Notice to: </h5>
             @foreach($roles as $role)
-            @if($role->id == 1)
+            @if($role->id == 1 || $role->id == 7)
             <?php continue; ?>
-            @else
-            @if($role->id == 7)
-            <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="role_id" id="inlineRadio1" value="{{$role->id}}" checked>
-                  <label class="form-check-label" for="inlineRadio1">{{$role->role}}</label>
-              </div>
               @else
               <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="role_id" id="inlineRadio1" value="{{$role->id}}">
+                  <input class="form-check-input" type="checkbox" name="role_id[]" id="inlineRadio1" value="{{$role->id}}">
                   <label class="form-check-label" for="inlineRadio1">{{$role->role}}</label>
               </div>
-            @endif
+
 
           @endif
           @endforeach
@@ -72,15 +66,15 @@
             <h5 class="mt-3">Send Notification  As:</h5>
 
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" id="emailNotification" value="Email" name="platform">
+              <input class="form-check-input" type="checkbox" id="emailNotification" value="Email" name="platform[]">
               <label class="form-check-label" for="emailNotification">Email</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id="SMSnotification" value="SMS" name="platform">
+            <input class="form-check-input" type="checkbox" id="SMSnotification" value="SMS" name="platform[]">
             <label class="form-check-label" for="SMSnotification">SMS</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id="Webnotification" value="Web"  name="platform">
+            <input class="form-check-input" type="checkbox" id="Webnotification" value="Web"  name="platform[]">
             <label class="form-check-label" for="Webnotification">Web</label>
           </div>
           @error('platform')

@@ -52,27 +52,26 @@ class NoticesController extends Controller
             'role_id' => 'required',
             'platform' => 'required',
         ]);
+
+
         $data = array($request->title,$request->details,$request->due_date);
 
-        if($request->role_id == 7){
-            $userdata = $users = User::all();
-        }else{
 
-              $userdata = $users = User::where('role_id', $request->role_id)->get();
-        }
+
+      $userdata = $users = User::whereIn('role_id', $request->role_id)->get();
 
 
 
-        if($request->platform == "Email"){
+
+        if(in_array("Email",$request->platform, true)){
 
           foreach ($userdata as $user) {
             //inactive users and removing super user
-            if(!$user['status'] || $user['role_id'] == 1){
+          if(!$user['status']){
               continue;
             }else{
               //relevant group of users or all users
-              if($user['role_id'] == $request->role_id || $request->role_id == 7){
-
+            if( in_array($user['role_id'],$request->role_id)){
                 $recipient =  $user['email'];
                 $name = $user['name'];
                 Mail::to($recipient)->send(new NoticeEMail($data,$name));
@@ -84,17 +83,19 @@ class NoticesController extends Controller
             }
 
           }
-        }else
-        if($request->platform == "SMS"){
-          echo 'Sending SMS<br>';
+        }
+
+
+        if( in_array("SMS",$request->platform, true )){
+
             $recipients = array();
           foreach($userdata as $user){
 
-            if(!$user['status'] || $user['role_id'] == 1){
+            if(!$user['status']){
               continue;
             }else{
 
-              if($user['role_id'] == $request->role_id || $request->role_id == 7){
+              if( in_array($user['role_id'],$request->role_id)){
 
                 $recipients[] +=  substr($user['phonenumber'], -12);
 
@@ -122,7 +123,13 @@ class NoticesController extends Controller
         }
 
 
-        // create a notice object
+
+        if( in_array("Web",$request->platform, true )){
+          echo 'Sending Web Notification.......<br>';
+
+        }
+
+
         $notice = new Notice();
         $notice->title = $request->title;
         $notice->details = $request->details;
