@@ -27,6 +27,9 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/animate.css') }}" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.css" rel="stylesheet">
+
 </head>
 <body>
 
@@ -89,6 +92,7 @@
         <li><a href="{{ route('notice.create') }}">Create Notices</a></li>
         <li><a href="{{ route('add.users') }}">Staff</a></li>
         <li><a href="{{ route('roles') }}">Roles</a></li>
+        <li><a href="{{ route('templates.home')}}">Templates</a></li>
 
         @else
           <li><a href="{{ url('/')}}">View Notices</a></li>
@@ -139,6 +143,7 @@
 <script type="text/javascript" src="{{ URL::asset('bootstrap\js\bootstrap.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('bootstrap\datetimepicker\build\jquery.datetimepicker.full.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('datatables\datatables.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.js"></script>
 
 
 
@@ -166,6 +171,25 @@ $(document).ready(function() {
     });
   });
 
+</script>
+
+<script>
+$(document).ready(function() {
+  $('#summernote').summernote({
+        height: 150,
+        toolbar: [
+            [ 'style', [ 'style' ] ],
+            [ 'font', [ 'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear'] ],
+            [ 'fontname', [ 'fontname' ] ],
+            [ 'fontsize', [ 'fontsize' ] ],
+            [ 'color', [ 'color' ] ],
+            [ 'para', [ 'ol', 'ul', 'paragraph', 'height' ] ],
+            [ 'table', [ 'table' ] ],
+            [ 'insert', [ ''] ],
+            [ 'view', [ 'undo', 'redo', 'fullscreen', 'codeview', 'help' ] ]
+        ]
+    });
+});
 </script>
 
 

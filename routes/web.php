@@ -34,4 +34,9 @@ Route::post('roles/save','RolesController@store')->name('roles.store');
 Route::delete('role/{id}/delete','RolesController@destroy')->name('role.delete');
 Route::put('role/{id}/update','RolesController@update')->name('role.update');
 
+Route::get('templates', 'TemplateController@index')->name('templates.home');
+Route::post('templates', 'TemplateController@store')->name('templates.store');
+Route::put('template/{id}/edit','TemplateController@update')->name('template.update');
+Route::delete('template/{id}/delete','TemplateController@destroy')->name('template.delete');
+
 Auth::routes();
