@@ -29,6 +29,18 @@
             @enderror
 
             </div>
+
+            @if($templates->count() > 0)
+            <div class="form-group">
+              <label for="templateSelector">Use Template</label>
+              <select class="select2 form-control" id="templateSelector" name="template"onclick="loadTemplateData()">
+                @foreach($templates as $temp)
+                <option value="{{$temp->content}}">{{$temp->name}}</option>
+                @endforeach
+              </select>
+
+            </div>
+            @endif
             <div class="form-group">
               <label for="inputDetails">Details</label><br>
             <textarea name="details" class="form-control" id="inputDetails"  cols="43" rows="5" required>{{ old('details') }}</textarea>
@@ -52,8 +64,8 @@
             <?php continue; ?>
               @else
               <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" name="role_id[]" id="inlineRadio1" value="{{$role->id}}">
-                  <label class="form-check-label" for="inlineRadio1">{{$role->role}}</label>
+                  <input class="form-check-input" type="checkbox" name="role_id[]" id="inlineRadio{{$role->id}}" value="{{$role->id}}">
+                  <label class="form-check-label" for="inlineRadio{{$role->id}}">{{$role->role}}</label>
               </div>
 
 

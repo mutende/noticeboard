@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateNoticesTable extends Migration
+class CreateNoticePlatformsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateNoticesTable extends Migration
      */
     public function up()
     {
-        Schema::create('notices', function (Blueprint $table) {
+        Schema::create('notice_platforms', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
-            $table->text('details');
-            $table->date('due_date');
-            $table->unsignedInteger('user_id');
-            $table->boolean('status')->default(true);
+            $table->integer('notice_id')->unsigned()->nullable();
+            $table->foreign('notice_id')->references('id')->on('notices')->onDelete('set null')->onUpdate('cascade');
+            $table->string('platform');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateNoticesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('notices');
+        Schema::dropIfExists('notice_platforms');
     }
 }

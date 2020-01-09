@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
-    
+
     use TimestampTrait;
 
     //tables
     protected $table = 'roles';
-    
+
     public function users()
     {
         return $this->hasMany(User::class);
@@ -19,5 +19,9 @@ class Role extends Model
 
     public function notices(){
         return $this->hasMany(Notice::class);
+    }
+
+    public function noticeandroles(){
+        return $this->hasMany(NoticeAndRoles::class);
     }
 }

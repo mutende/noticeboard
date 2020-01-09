@@ -144,6 +144,7 @@
 <script type="text/javascript" src="{{ URL::asset('bootstrap\datetimepicker\build\jquery.datetimepicker.full.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('datatables\datatables.min.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.js"></script>
+<script type="text/javascript" src="{{URL::asset('js/main.js')}}"></script>
 
 
 

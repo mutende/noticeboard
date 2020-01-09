@@ -44,8 +44,34 @@
         <td><?php echo $count; ?></td>
         <td>{{$notice->title}}</td>
         <td>{{$notice->due_date}}</td>
-        <td>{{$notice->role->role}}</td>
-        <td>{{$notice->platform}}</td>
+        <td>
+          <?php $num = 1; ?>
+          @foreach($noticetoroles as $rs)
+          @if($notice->id == $rs->notice_id)
+          @if($num > 1)
+           , {{$rs->role->role}}
+           @else
+           {{$rs->role->role}}
+           @endif
+          @endif
+          <?php $num++?>
+          @endforeach
+
+        </td>
+        <td>
+
+          <?php $num2 = 1; ?>
+          @foreach($noticeplatforms as $np)
+          @if($notice->id == $np->notice_id)
+          @if($num2 > 1)
+           , {{$np->platform}}
+          @else
+            {{$np->platform}}
+          @endif
+          @endif
+          <?php $num2++; ?>
+          @endforeach
+        </td>
         <td>
           @if($notice->status)
           <span class="text-success">Active</span>

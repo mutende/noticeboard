@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
     <div class="col-md-4 ml-auto mr-auto">
-        <h1> Update  Notice</h1>
+        <h2> Update & Resend Notice</h1>
 
 
         <form method= "POST" action="{{ route('notice.update', $notice->id ) }}">
@@ -40,7 +40,7 @@
             <?php continue; ?>
             @else
               <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="role_id" id="inlineRadio1" value="{{$role->id}}"   @if($role->id == $notice->role->id) checked @endif >
+                  <input class="form-check-input" type="checkbox" name="role_id[]" id="inlineRadio1" value="{{$role->id}}"   @if(in_array($role->id, $noticetoroles)) checked @endif >
                   <label class="form-check-label" for="inlineRadio1">{{$role->role}}</label>
               </div>
 
@@ -54,15 +54,15 @@
             <h5 class="mt-3">Send Notification  As:</h5>
 
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" id="emailNotification" value="Email" name="platform" @if($notice->platform == "Email") checked @endif>
+              <input class="form-check-input" type="checkbox" id="emailNotification" value="Email" name="platform[]" @if(in_array("Email",$noticeplatforms)) checked @endif>
               <label class="form-check-label" for="emailNotification">Email</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id="SMSnotification" value="SMS" name="platform"  @if($notice->platform == "SMS") checked @endif>
+            <input class="form-check-input" type="checkbox" id="SMSnotification" value="SMS" name="platform[]"  @if(in_array("SMS",$noticeplatforms)) checked @endif>
             <label class="form-check-label" for="SMSnotification">SMS</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id="Webnotification" value="Web"  name="platform"  @if($notice->platform == "Web") checked @endif>
+            <input class="form-check-input" type="checkbox" id="Webnotification" value="Web"  name="platform[]"  @if(in_array("Web",$noticeplatforms)) checked @endif>
             <label class="form-check-label" for="Webnotification">Web</label>
           </div>
 
@@ -70,7 +70,7 @@
 
 
           <div class="mt-3">
-              <button type="submit" class="btn btn-primary">Send Notice</button>
+              <button type="submit" class="btn btn-primary">Resend Notice</button>
           </div>
  </form>
     </div>

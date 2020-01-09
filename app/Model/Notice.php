@@ -24,4 +24,13 @@ class Notice extends Model
     {
         return $this->belongsTo(User::class,'user_id');
     }
+
+    public function noticeandroles(){
+        return $this->hasMany(NoticeAndRoles::class);
+    }
+
+    public function noticeplatform(){
+        return $this->hasMany(NoticePlatform::class);
+    }
+
 }

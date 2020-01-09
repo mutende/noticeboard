@@ -41,8 +41,8 @@
       <?php continue; ?>
         @else
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="role_id" id="inlineRadio1" value="{{$role->id}}">
-            <label class="form-check-label" for="inlineRadio1">{{$role->role}}</label>
+            <input class="form-check-input" type="radio" name="role_id" id="inlineRadio1{{$role->id}}" value="{{$role->id}}">
+            <label class="form-check-label" for="inlineRadio1{{$role->id}}">{{$role->role}}</label>
         </div>
       @endif
 
@@ -147,8 +147,8 @@
                   <?php continue; ?>
                     @else
                     <div class="form-check form-check-inline mr-5 ml-5">
-                        <input class="form-check-input" type="radio" name="role_id" id="inlineRadio1" value="{{$role->id}}" @if($user->role_id == $role->id ) checked @endif>
-                        <label class="form-check-label" for="inlineRadio1">{{$role->role}}</label>
+                        <input class="form-check-input" type="radio" name="role_id" id="inlineRadior{{$role->id}}" value="{{$role->id}}" @if($user->role_id == $role->id ) checked @endif>
+                        <label class="form-check-label" for="inlineRadior{{$role->id}}">{{$role->role}}</label>
                     </div>
                   @endif
 
@@ -159,16 +159,16 @@
                   <h5 class="h5 mt-3 mr-5 ml-5">Account Status</h5>
                   @if($user->status)
                   <div class="form-check form-check-inline mr-5 ml-5">
-                    <input class="form-check-input" type="radio" name="status" id="statusRadio1" value="1" checked>
-                    <label class="form-check-label mr-5 text-success" for="statusRadio1">Active</label>
-                    <input class="form-check-input" type="radio" name="status" id="statusRadio2" value="0">
+                    <input class="form-check-input" type="radio" name="status" id="statusRadiouser{{$user->id}}" value="1" checked>
+                    <label class="form-check-label mr-5 text-success" for="statusRadiouser{{$user->id}}">Active</label>
+                    <input class="form-check-input" type="radio" name="status" id="statusRadio2{{$user->id}}" value="0">
                     <label class="form-check-label" for="statusRadio2">Suspended</label>
                   </div>
                   @else
                   <div class="form-check form-check-inline mr-5 ml-5">
-                      <input class="form-check-input" type="radio" name="status" id="statusRadio1" value="1">
+                      <input class="form-check-input" type="radio" name="status" id="statusRadiouser{{$user->id}}" value="1">
                       <label class="form-check-label mr-5" for="statusRadio">Active</label>
-                      <input class="form-check-input" type="radio" name="status" id="statusRadio2" value="0" checked>
+                      <input class="form-check-input" type="radio" name="status" id="statusRadio2{{$user->id}}" value="0" checked>
                       <label class="form-check-label text-danger" for="statusRadio2">Suspended</label>
                   </div>
 

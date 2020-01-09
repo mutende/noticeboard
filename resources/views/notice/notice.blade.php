@@ -11,13 +11,38 @@
 
       </div>
       <div class="card-body">
-        <p>Notice to : {{$notice->role->role}}</p>
+        <p>
+          Notice to :
+          <?php $num = 1; ?>
+          @foreach($noticetoroles as $rs)
+          @if($num > 1)
+           , {{$rs->role->role}}
+           @else
+           {{$rs->role->role}}
+           @endif
+          <?php $num++?>
+          @endforeach
+        </p>
         <p>
         <h5>Notice Details</h5>
         {{$notice->details}}
 
         </p>
-        <p>Sent via : {{$notice->platform}}</p>
+        <p>
+          Sent via :
+          <?php $num2 = 1; ?>
+          @foreach($noticeplatforms as $np)
+          @if($notice->id == $np->notice_id)
+          @if($num2 > 1)
+           , {{$np->platform}}
+          @else
+            {{$np->platform}}
+          @endif
+          @endif
+          <?php $num2++; ?>
+          @endforeach
+
+        </p>
         <p>Due Date:   <span>{{$notice->due_date}}</span></p>
 
         <div class="row">
