@@ -131,12 +131,13 @@ class NoticesController extends Controller
 
 
 
-
-        if(in_array("Web",$request->platform, true )){
-          echo 'Sending Web Notification.......<br>';
-
-
-        }
+        //
+        // if(in_array("Web",$request->platform, true )){
+        // //  echo 'Sending Web Notification.......<br>';
+        // continue;
+        //
+        //
+        // }
 
 
         $notice = new Notice();
@@ -294,12 +295,12 @@ class NoticesController extends Controller
 
 
 
-
-        if(in_array("Web",$request->platform, true )){
-          echo 'Sending Web Notification.......<br>';
-
-
-        }
+        //
+        // if(in_array("Web",$request->platform, true )){
+        //   //echo 'Sending Web Notification.......<br>';
+        // //  continue;
+        //
+        // }
 
 
         $notice= Notice::findorFail($id);
